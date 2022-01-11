@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Зависимости
     'rest_framework',
+    "corsheaders",
 
     # Наши приложения
     'api_img.apps.ApiImgConfig'
