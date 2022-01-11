@@ -59,6 +59,9 @@ class ImagesModel(models.Model):
         return os.path.join(str(settings.MEDIA_ROOT), str(settings.SMALL_IMG_PATH))
         # return f"{settings.MEDIA_ROOT}/{settings.SMALL_IMG_PATH}"
 
+    class Meta:
+        db_table = 'nips_images'
+
 
 def create_small_img(instance, size=500):
     """Создает миниатюрную версию изображения"""
