@@ -24,7 +24,6 @@ DEBUG = env('DEBUG')
 
 
 ALLOWED_HOSTS = [
-                    # '192.168.2.193',
                     'localhost',
                     '127.0.0.1',
                     '[::1]',
@@ -214,7 +213,8 @@ REST_FRAMEWORK = {
 # Для работы внутри Docker контейнера указываем
 # либо redis либо IP основной машины
 # redis://<IP>:6379
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_BROKER_URL = env('CELERY_BROKER_URL')
+# CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 # CELERY_BROKER_URL = 'redis://redis:6379'
 
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend

@@ -1,0 +1,3 @@
+{
+  "VUE_APP_HOST": "http://nips_django:9001"
+}

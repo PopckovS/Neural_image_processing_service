@@ -1,0 +1,64 @@
+version: '3.5'
+services:
+
+
+  # Сервер на Django
+  nips_django:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      network: host
+    container_name: nips_django
+    restart: always
+    volumes:
+      - ./media:/usr/src/app/server/server/media
+    ports:
+      - "9000:8000"
+    depends_on:
+      - nips_postgres
+    env_file:
+      - ./server.env
+
+
+  # Celery для Django
+  nips_celery:
+    container_name: nips_celery
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      network: host
+    depends_on:
+      - nips_django
+    command: celery -A server worker -l INFO
+    volumes:
+      - ./media:/usr/src/app/server/server/media
+    env_file:
+      - ./server.env
+
+
+  # Postgres для Django
+  nips_postgres:
+    image: postgres
+    container_name: nips_postgres
+    restart: always
+    ports:
+      - "9001:5432"
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    env_file:
+      - ./postgres/.env
+
+
+  # Redis для Djnago + Celery
+  redis:
+    image: redis:alpine
+
+
+  # Фронт vue.js
+  nips_front:
+    container_name: nips_front
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "9002:8000"
