@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework.routers import SimpleRouter
+from api_img.views import ImagesViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+# Создание маршрутов CRUD для модели Images
+router = SimpleRouter()
+router.register(r'api/v1/images', ImagesViewSet)
+urlpatterns += router.urls

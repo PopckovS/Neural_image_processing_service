@@ -24,6 +24,7 @@ DEBUG = env('DEBUG')
 
 
 ALLOWED_HOSTS = [
+                    # '192.168.2.193',
                     'localhost',
                     '127.0.0.1',
                     '[::1]',
@@ -213,8 +214,8 @@ REST_FRAMEWORK = {
 # Для работы внутри Docker контейнера указываем
 # либо redis либо IP основной машины
 # redis://<IP>:6379
-# CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+# CELERY_BROKER_URL = 'redis://redis:6379'
 
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
@@ -266,7 +267,7 @@ CONVERT_IMG_TO_FORMAT = '.jpg'
 USE_NEURAL_STYLIZE = True
 
 # Количество шагов обработки изображения нейронной сетью. По дефолту в самой функции шагов 100
-QUALITY = 100
+QUALITY = 10
 
 # Уровень прозрачности для генерируемых изображений
 ALPHA_VALUE = 128

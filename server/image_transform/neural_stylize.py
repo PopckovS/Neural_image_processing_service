@@ -9,7 +9,7 @@ from tensorflow import keras
 
 # Подовляем вывод отладочной информации в консоль
 # Уровень отображения ошибок: 0 - не выводить 3 - вывод
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = 3
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 def neural_style_transfer(img_photo, img_style, quality=100):
