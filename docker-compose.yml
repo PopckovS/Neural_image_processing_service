@@ -11,7 +11,7 @@ services:
     container_name: nips_django
     restart: always
     volumes:
-      - ./media:/usr/src/app/server/server/media
+      - ./media:/usr/src/app/server/media
     ports:
       - "9000:8000"
     depends_on:
@@ -31,7 +31,7 @@ services:
       - nips_django
     command: celery -A server worker -l INFO
     volumes:
-      - ./media:/usr/src/app/server/server/media
+      - ./media:/usr/src/app/server/media
     env_file:
       - ./server.env
 
