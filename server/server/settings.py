@@ -128,6 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = str(BASE_DIR / "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -135,27 +136,18 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
-
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-STATIC_URL = '/static/'
-
-
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:9000',
-    'http://127.0.0.1:9000'
+    'http://localhost',
+    'http://127.0.0.1'
     # 'http://localhost:8000',
     # 'http://127.0.0.1:8000'
 ]
 
 CORS_ALLOW_ALL_ORIGINS=True
 
-
-MEDIA_ROOT = str(APPS_DIR / "media")
+# Пути для сохранения загруженных изображений
+# MEDIA_ROOT = str(APPS_DIR / "media")
+MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
 
 
@@ -250,14 +242,14 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 # НАСТРОЙКИ ДЛЯ РАБОТЫ С ИЗОБРАЖЕНИЯМИ
 # ------------------------------------------------------------------------------
 # Директория для временного хранения настроек
-DIR_TRANSFER = str(MEDIA_ROOT + '/images/api_img/transfer/')
+DIR_TRANSFER = os.path.join(str(MEDIA_ROOT), 'images', 'api_img', 'transfer')
 
 # Директории для загрузки больших и маленьких изображений
-BIG_IMG_PATH = "images/api_img/big/"
-SMALL_IMG_PATH = "images/api_img/min/"
+BIG_IMG_PATH = os.path.join('images', 'api_img', 'big')
+SMALL_IMG_PATH = os.path.join('images', 'api_img', 'min')
 
 # Ограничение в 2 MB указанное в байтах
-FILE_MAX_SIZE = 2100000
+FILE_MAX_SIZE = env.int('FILE_MAX_SIZE')
 
 # Форматы изображений разрешенных к загрузке
 UPLOAD_IMAGE = ['jpg', 'jpeg']
@@ -269,7 +261,7 @@ CONVERT_IMG_TO_FORMAT = '.jpg'
 USE_NEURAL_STYLIZE = True
 
 # Количество шагов обработки изображения нейронной сетью. По дефолту в самой функции шагов 100
-QUALITY = 10
+QUALITY = env.int('QUALITY')
 
 # Уровень прозрачности для генерируемых изображений
 ALPHA_VALUE = 128
