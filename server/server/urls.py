@@ -18,6 +18,10 @@ from django.urls import path
 from rest_framework.routers import SimpleRouter
 from api_img.views import ImagesViewSet
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
@@ -26,3 +30,6 @@ urlpatterns = [
 router = SimpleRouter()
 router.register(r'api/v1/images', ImagesViewSet)
 urlpatterns += router.urls
+
+# if settings.DEBUG:
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

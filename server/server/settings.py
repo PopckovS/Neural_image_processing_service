@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
 
+    # "django_celery_beat",
+    # "rest_framework.authtoken",
+
     # Наши приложения
     'api_img.apps.ApiImgConfig'
 ]
@@ -147,8 +150,9 @@ CORS_ALLOW_ALL_ORIGINS=True
 
 # Пути для сохранения загруженных изображений
 # MEDIA_ROOT = str(APPS_DIR / "media")
-MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 
 
 
@@ -207,7 +211,7 @@ REST_FRAMEWORK = {
 # Для работы внутри Docker контейнера указываем
 # либо redis либо IP основной машины
 # redis://<IP>:6379
-CELERY_BROKER_URL = env('CELERY_BROKER_URL')
+CELERY_BROKER_URL = env.str('CELERY_BROKER_URL')
 # CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 # CELERY_BROKER_URL = 'redis://redis:6379'
 

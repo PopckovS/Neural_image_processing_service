@@ -32,7 +32,7 @@ services:
       - nips_django
     command: celery -A server worker -l INFO
     volumes:
-      - ./media:/usr/src/app/server/media
+      - ./media:/usr/src/app/media
     env_file:
       - ./.env
 
