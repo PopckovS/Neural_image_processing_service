@@ -1,5 +1,4 @@
 .idea
-*.png
-*.jpg
-.env
+#media/images/api_img/big/*.png
+#media/images/api_img/big/*.jpg
 venv

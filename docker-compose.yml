@@ -6,7 +6,7 @@ services:
   nips_django:
     build:
       context: ./server
-      dockerfile: Dockerfile
+      dockerfile: DockerFileDjango
       network: host
     container_name: nips_django
     restart: always
@@ -26,11 +26,13 @@ services:
     container_name: nips_celery
     build:
       context: ./server
-      dockerfile: Dockerfile
+      dockerfile: DockerFileCelery
       network: host
     depends_on:
       - nips_django
-    command: celery -A server worker -l INFO
+      - nips_redis
+      - nips_postgres
+#    command: celery -A server worker -l INFO
     volumes:
       - ./media:/usr/src/app/media
     env_file:
