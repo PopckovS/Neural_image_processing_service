@@ -1,6 +1,7 @@
 from celery import shared_task
 from django.conf import settings
 from server.celery import app
+import os
 
 # в зависимости от настройки подгружаем метод стилизации изображения
 if settings.USE_NEURAL_STYLIZE:
@@ -23,5 +24,5 @@ def img_style(photo_image_path, filter_image_path, img_id):
 
     # Обновляем путь к созданному изображению
     img = ImagesModel.objects.get(pk=img_id)
-    img.big_image = settings.BIG_IMG_PATH + stylize_img
+    img.big_image = os.path.join(settings.BIG_IMG_PATH, stylize_img)
     img.save()
