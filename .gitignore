@@ -1,4 +1,4 @@
 .idea
-#media/images/api_img/big/*.png
-#media/images/api_img/big/*.jpg
+*.png
+*.jpg
 venv
