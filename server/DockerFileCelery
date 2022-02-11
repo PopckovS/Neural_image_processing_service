@@ -14,7 +14,3 @@ RUN pip install -r requirements.txt
 COPY . .
 
 CMD celery -A server worker -l INFO
-
-# запускаем команды для миграций и фикстур
-#RUN chmod +x ./docker-entrypoint-celery.sh
-#ENTRYPOINT [ "./docker-entrypoint-celery.sh" ]

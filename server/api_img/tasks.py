@@ -11,7 +11,6 @@ else:
 
 from .models import ImagesModel
 
-# @shared_task
 @app.task
 def img_style(photo_image_path, filter_image_path, img_id):
     """Таск создает новое изображение, и обновляет поле записи в БД"""

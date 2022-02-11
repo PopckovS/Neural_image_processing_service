@@ -68,7 +68,8 @@ def create_small_img(instance, size=500):
     img = Image.open(instance.big_image.path)
     if img.height > size or img.width > size:
         img.thumbnail((size, size))
-        img.save(instance.get_path_to_small_photo() + os.path.basename(instance.big_image.path))
+        path = os.path.join(instance.get_path_to_small_photo(), os.path.basename(instance.big_image.path))
+        img.save(path)
         min_image_path = os.path.join(settings.SMALL_IMG_PATH, os.path.basename(instance.big_image.path))
     else:
         min_image_path = instance.big_image
